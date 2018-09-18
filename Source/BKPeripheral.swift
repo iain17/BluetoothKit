@@ -222,7 +222,10 @@ public class BKPeripheral: BKPeer, BKCBPeripheralManagerDelegate, BKAvailability
 
     internal func peripheralManager(_ peripheral: CBPeripheralManager, didAdd service: CBService, error: Error?) {
         if !peripheralManager.isAdvertising {
-            var advertisementData: [String: Any] = [ CBAdvertisementDataServiceUUIDsKey: _configuration.serviceUUIDs ]
+            var advertisementData: [String: Any] = [CBAdvertisementDataServiceUUIDsKey: _configuration.serviceUUIDs]
+            if let data = _configuration.serviceData {
+                advertisementData[CBAdvertisementDataServiceDataKey] = data
+            }
             if let localName = _configuration.localName {
                 advertisementData[CBAdvertisementDataLocalNameKey] = localName
             }
@@ -231,6 +234,9 @@ public class BKPeripheral: BKPeer, BKCBPeripheralManagerDelegate, BKAvailability
     }
 
     internal func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didSubscribeToCharacteristic characteristic: CBCharacteristic) {
+        guard characteristic.uuid == self.characteristicData.uuid else {
+            return
+        }
         let remoteCentral = BKRemoteCentral(central: central)
         remoteCentral.configuration = configuration
         connectedRemotePeers.append(remoteCentral)
@@ -238,10 +244,12 @@ public class BKPeripheral: BKPeer, BKCBPeripheralManagerDelegate, BKAvailability
     }
 
     internal func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didUnsubscribeFromCharacteristic characteristic: CBCharacteristic) {
-
+        guard characteristic.uuid == self.characteristicData.uuid else {
+            return
+        }
         #if os(OSX)
             if #available(OSX 10.13, *) {
-                if let remoteCentral = connectedRemotePeers.filter({ ($0.identifier == central.identifier) }).last as? BKRemoteCentral {
+                if let remoteCentral = connectedRemotePeers.filter({ ($0.o == central.identifier) }).last as? BKRemoteCentral {
                     handleDisconnectForRemoteCentral(remoteCentral)
                 }
             } else {
