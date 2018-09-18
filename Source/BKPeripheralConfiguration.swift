@@ -37,7 +37,7 @@ public class BKPeripheralConfiguration: BKConfiguration {
 
     // MARK: Initialization
 
-    public init(dataServiceUUID: UUID, dataServiceCharacteristicUUID: UUID, localName: String? = nil, chunkingEnabled: Bool) {
+    public init(dataServiceUUID: UUID, dataServiceCharacteristicUUID: UUID, localName: String? = nil, chunkingEnabled: Bool = true) {
         self.localName = localName
         super.init(dataServiceUUID: dataServiceUUID, dataServiceCharacteristicUUID: dataServiceCharacteristicUUID, chunkingEnabled: chunkingEnabled)
     }

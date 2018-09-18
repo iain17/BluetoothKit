@@ -52,7 +52,7 @@ public class BKConfiguration {
 
     // MARK: Initialization
 
-    public init(dataServiceUUID: UUID, dataServiceCharacteristicUUID: UUID, chunkingEnabled: Bool) {
+    public init(dataServiceUUID: UUID, dataServiceCharacteristicUUID: UUID, chunkingEnabled: Bool = true) {
         self.dataServiceUUID = CBUUID(nsuuid: dataServiceUUID)
         self.dataServiceCharacteristicUUID = CBUUID(nsuuid: dataServiceCharacteristicUUID)
         self.endOfDataMark = "EOD".data(using: String.Encoding.utf8)!
