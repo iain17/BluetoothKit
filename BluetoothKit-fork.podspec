@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = 'BluetoothKit-fork'
-  s.version  = '0.4.3'
+  s.version  = '0.4.4'
   s.license  = { :type => 'MIT' }
   s.homepage = 'https://github.com/iain17/BluetoothKit'
   s.authors  = { 'Rasmus Taulborg Hummelmose' => 'rasmus@hummelmose.dk' }
