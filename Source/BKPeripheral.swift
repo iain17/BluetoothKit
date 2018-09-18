@@ -249,7 +249,7 @@ public class BKPeripheral: BKPeer, BKCBPeripheralManagerDelegate, BKAvailability
         }
         #if os(OSX)
             if #available(OSX 10.13, *) {
-                if let remoteCentral = connectedRemotePeers.filter({ ($0.o == central.identifier) }).last as? BKRemoteCentral {
+                if let remoteCentral = connectedRemotePeers.filter({ ($0.identifier == central.identifier) }).last as? BKRemoteCentral {
                     handleDisconnectForRemoteCentral(remoteCentral)
                 }
             } else {
