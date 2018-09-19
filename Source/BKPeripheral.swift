@@ -76,7 +76,7 @@ public class BKPeripheral: BKPeer, BKCBPeripheralManagerDelegate, BKAvailability
 
     /// Currently connected remote centrals
     public var connectedRemoteCentrals: [BKRemoteCentral] {
-        return connectedRemotePeers.flatMap({
+        return connectedRemotePeers.compactMap({
             guard let remoteCentral = $0 as? BKRemoteCentral else {
                 return nil
             }

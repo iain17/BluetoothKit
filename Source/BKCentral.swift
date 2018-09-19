@@ -103,7 +103,7 @@ public class BKCentral: BKPeer, BKCBCentralManagerStateDelegate, BKConnectionPoo
             return connectedRemotePeripherals
         }
         set {
-            connectionPool.connectedRemotePeripherals = newValue.flatMap({
+            connectionPool.connectedRemotePeripherals = newValue.compactMap({
                 guard let remotePeripheral = $0 as? BKRemotePeripheral else {
                     return nil
                 }
