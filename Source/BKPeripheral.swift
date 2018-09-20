@@ -223,9 +223,6 @@ public class BKPeripheral: BKPeer, BKCBPeripheralManagerDelegate, BKAvailability
     internal func peripheralManager(_ peripheral: CBPeripheralManager, didAdd service: CBService, error: Error?) {
         if !peripheralManager.isAdvertising {
             var advertisementData: [String: Any] = [CBAdvertisementDataServiceUUIDsKey: _configuration.serviceUUIDs]
-            if let data = _configuration.serviceData {
-                advertisementData[CBAdvertisementDataServiceDataKey] = data
-            }
             if let localName = _configuration.localName {
                 advertisementData[CBAdvertisementDataLocalNameKey] = localName
             }

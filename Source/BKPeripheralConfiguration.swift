@@ -35,13 +35,10 @@ public class BKPeripheralConfiguration: BKConfiguration {
     /// The local name to broadcast to remote centrals.
     public let localName: String?
 
-    public var serviceData: Data?
-
     // MARK: Initialization
 
-    public init(dataServiceUUID: UUID, dataServiceCharacteristicUUID: UUID, localName: String? = nil, chunkingEnabled: Bool = true, serviceData: Data? = nil) {
+    public init(dataServiceUUID: UUID, dataServiceCharacteristicUUID: UUID, localName: String? = nil, chunkingEnabled: Bool = true) {
         self.localName = localName
-        self.serviceData = serviceData
         super.init(dataServiceUUID: dataServiceUUID, dataServiceCharacteristicUUID: dataServiceCharacteristicUUID, chunkingEnabled: chunkingEnabled)
     }
 
